@@ -1,4 +1,4 @@
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import { Platform, StyleSheet, Text, View, ScrollView } from 'react-native';
 import PokemonCard from './components/PokemonCard';
 
 export default function App() {
@@ -10,9 +10,39 @@ export default function App() {
     moves: ['Scratch', 'Ember', 'Growl', 'Leer'],
     weaknesses: ['water', 'Rock'],
   };
+  const squirtData = {
+    name: 'Squirtle',
+    image: require('./assets/squirtle.png'),
+    type: 'water',
+    hp: 44,
+    moves: ['Tackle', 'Water Gunn', 'Tail Whip', 'Withdraw'],
+    weaknesses: ['Electric', 'Grass'],
+  };
+  const bulbasaurData = {
+    name: 'Bulbasaur',
+    image: require('./assets/bulbasaur.png'),
+    type: 'Grass',
+    hp: 45,
+    moves: ['Tackle', 'Vine Whip', 'Growl', 'Leech Seed'],
+    weaknesses: ['Fire', 'Ice', 'Flying', 'Psychic'],
+  };
+
+  const pikachuData = {
+    name: 'Pikachu',
+    image: require('./assets/pikachu.png'),
+    type: 'Electric',
+    hp: 35,
+    moves: ['Quick Attack', 'Thunderbolt', 'Tail Whip', 'Growl'],
+    weaknesses: ['Ground'],
+  };
   return (
     <View style={styles.container}>
-      <PokemonCard {...CharmanderData} />
+      <ScrollView>
+        <PokemonCard {...CharmanderData} />
+        <PokemonCard {...squirtData} />
+        <PokemonCard {...bulbasaurData} />
+        <PokemonCard {...pikachuData} />
+      </ScrollView>
     </View>
   );
 }

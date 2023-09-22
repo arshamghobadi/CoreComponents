@@ -1,5 +1,19 @@
 import { StyleSheet, Text, View, Platform, Image } from 'react-native';
 
+const getTypeDetails = (type) => {
+  switch (type.toLowerCase()) {
+    case 'electric':
+      return { borderColor: '#FFD700', emoji: '⚡' };
+    case 'water':
+      return { borderColor: '#6493EA', emoji: '💧' };
+    case 'fire':
+      return { borderColor: '#FF5733', emoji: '🔥' };
+    case 'grass':
+      return { borderColor: '#66CC66', emoji: '🍀' };
+    default:
+      return { borderColor: '#A0A0A0', emoji: '❓' };
+  }
+};
 export default function PokemonCard({
   name,
   image,
@@ -9,6 +23,7 @@ export default function PokemonCard({
   weaknesses,
 }) {
   {
+    const { borderColor, emoji } = getTypeDetails(type);
     return (
       <View style={style.card}>
         <View style={style.nameContainer}>
@@ -22,14 +37,19 @@ export default function PokemonCard({
           accessibilityLabel={`${name} pokemon`}
         />
 
-        <View>
-          <Text>{type}</Text>
+        <View style={style.typeContainer}>
+          <View style={[style.badge, { borderColor }]}>
+            <Text style={style.typeEmoji}>{emoji}</Text>
+            <Text style={style.typeText}>{type}</Text>
+          </View>
         </View>
-        <View>
-          <Text>moves: {moves.join(', ')}</Text>
+        <View style={style.movesContainer}>
+          <Text style={style.movesText}>M oves: {moves.join(', ')}</Text>
         </View>
-        <View>
-          <Text>Weaknesses: {weaknesses.join(', ')}</Text>
+        <View style={style.weaknessContainer}>
+          <Text style={style.weaknessText}>
+            Weaknesses: {weaknesses.join(', ')}
+          </Text>
         </View>
       </View>
     );
@@ -70,5 +90,39 @@ const style = StyleSheet.create({
     width: '100%',
     height: 200,
     marginBottom: 16,
+  },
+  typeContainer: {
+    alignItems: 'center',
+    marginBottom: 40,
+  },
+  badge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+    borderRadius: 20,
+    borderWidth: 4,
+  },
+  typeEmoji: {
+    fontSize: 30,
+    marginRight: 12,
+  },
+  typeText: {
+    fontSize: 22,
+    fontWeight: 'bold',
+  },
+  movesContainer: {
+    marginBottom: 16,
+  },
+  movesText: {
+    fontSize: 22,
+    fontWeight: 'bold',
+  },
+  weaknessContainer: {
+    marginBottom: 16,
+  },
+  weaknessText: {
+    fontSize: 22,
+    fontWeight: 'bold',
   },
 });
